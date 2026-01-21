@@ -1,5 +1,11 @@
 # @maxencerb/foundry-mcp
 
+## 0.1.2
+
+### Patch Changes
+
+- ff15047: Force next version
+
 ## 0.1.1
 
 ### Patch Changes
