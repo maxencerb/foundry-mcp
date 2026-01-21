@@ -1,5 +1,11 @@
 # @maxencerb/foundry-mcp
 
+## 0.1.3
+
+### Patch Changes
+
+- ced08a4: Force next version
+
 ## 0.1.2
 
 ### Patch Changes
