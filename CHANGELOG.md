@@ -1,5 +1,11 @@
 # @maxencerb/foundry-mcp
 
+## 0.1.1
+
+### Patch Changes
+
+- 7e17eb7: Added OICD for github actions
+
 ## 0.1.0
 
 ### Minor Changes
