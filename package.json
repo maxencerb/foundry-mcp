@@ -1,0 +1,62 @@
+{
+  "name": "@maxencerb/foundry-mcp",
+  "version": "0.0.0",
+  "description": "MCP server for the Foundry Ethereum development toolkit (Forge, Cast, Anvil, Chisel)",
+  "module": "src/index.ts",
+  "type": "module",
+  "bin": {
+    "foundry-mcp": "./src/index.ts"
+  },
+  "scripts": {
+    "start": "bun src/index.ts",
+    "dev": "bun --watch src/index.ts",
+    "inspect": "bunx @modelcontextprotocol/inspector bun src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "foundry",
+    "ethereum",
+    "solidity",
+    "forge",
+    "cast",
+    "anvil",
+    "chisel",
+    "web3",
+    "smart-contracts",
+    "blockchain",
+    "claude",
+    "ai"
+  ],
+  "author": "maxencerb",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maxencerb/foundry-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/maxencerb/foundry-mcp/issues"
+  },
+  "homepage": "https://github.com/maxencerb/foundry-mcp#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "src/**/*"
+  ],
+  "devDependencies": {
+    "@changesets/cli": "^2.27.0",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.25.3",
+    "zod": "^4.3.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
