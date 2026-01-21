@@ -8,41 +8,12 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  changesets:
-    name: Create version pull request
+  release:
+    name: Release
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-
-      - name: Install Dependencies
-        run: bun install
-
-      - name: Type Check
-        run: bun run typecheck
-
-      - name: Create Version Pull Request
-        uses: changesets/action@v1
-        with:
-          version: npx changeset version
-          title: "chore: release package"
-          commit: "chore: release package"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  release:
-    name: Publish to npm
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
       id-token: write
     steps:
       - name: Checkout Repo
@@ -61,31 +32,17 @@ jobs:
       - name: Install Dependencies
         run: bun install
 
-      - name: Check if version is published
-        id: check
-        run: |
-          PACKAGE_VERSION=$(node -p "require('./package.json').version")
-          PACKAGE_NAME=$(node -p "require('./package.json').name")
-          if npm view "${PACKAGE_NAME}@${PACKAGE_VERSION}" version 2>/dev/null; then
-            echo "published=true" >> $GITHUB_OUTPUT
-          else
-            echo "published=false" >> $GITHUB_OUTPUT
-          fi
-          echo "version=${PACKAGE_VERSION}" >> $GITHUB_OUTPUT
+      - name: Type Check
+        run: bun run typecheck
 
-      - name: Publish to npm
-        if: steps.check.outputs.published == 'false'
-        run: npm publish --provenance --access public
-
-      - name: Create GitHub Release
-        if: steps.check.outputs.published == 'false'
-        uses: actions/github-script@v7
+      - name: Create Release Pull Request or Publish
+        id: changesets
+        uses: changesets/action@06245a4e0a36c064a573d4150030f5ec548e4fcc
         with:
-          script: |
-            await github.rest.repos.createRelease({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              tag_name: `v${{ steps.check.outputs.version }}`,
-              name: `v${{ steps.check.outputs.version }}`,
-              generate_release_notes: true
-            });
+          publish: npx changeset publish
+          version: npx changeset version
+          title: "chore: release package"
+          commit: "chore: release package"
+          createGithubReleases: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
