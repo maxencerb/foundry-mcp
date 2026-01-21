@@ -39,10 +39,9 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: bunx changeset publish
-          version: bunx changeset version
+          publish: npx changeset publish
+          version: npx changeset version
           title: "chore: release package"
           commit: "chore: release package"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
