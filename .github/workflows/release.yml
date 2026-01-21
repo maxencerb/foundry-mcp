@@ -29,6 +29,9 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Setup npm for provenance
+        run: cp .npmrc ~/.npmrc
+
       - name: Install Dependencies
         run: bun install
 
