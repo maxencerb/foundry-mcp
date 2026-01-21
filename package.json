@@ -12,7 +12,7 @@
     "dev": "bun --watch src/index.ts",
     "inspect": "bunx @modelcontextprotocol/inspector bun src/index.ts",
     "typecheck": "tsc --noEmit",
-    "release": "changeset version",
+    "release": "changeset publish",
     "version": "changeset version"
   },
   "keywords": [
