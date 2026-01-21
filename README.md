@@ -42,6 +42,34 @@ bun install -g @maxencerb/foundry-mcp
 
 ## Usage
 
+### With Claude Code
+
+Add the MCP server using the CLI:
+
+```bash
+# Add with environment variables
+claude mcp add --transport stdio --env RPC_URL=http://localhost:8545 foundry -- bunx @maxencerb/foundry-mcp
+
+# Or add project-scoped (creates .mcp.json)
+claude mcp add --transport stdio --scope project foundry -- bunx @maxencerb/foundry-mcp
+```
+
+Or create a `.mcp.json` file in your project root:
+
+```json
+{
+  "mcpServers": {
+    "foundry": {
+      "command": "bunx",
+      "args": ["@maxencerb/foundry-mcp"],
+      "env": {
+        "RPC_URL": "${RPC_URL:-http://localhost:8545}"
+      }
+    }
+  }
+}
+```
+
 ### With Claude Desktop
 
 Add to your Claude Desktop configuration (`~/Library/Application Support/Claude/claude_desktop_config.json` on macOS):
@@ -228,6 +256,7 @@ bun run inspect
 - [Foundry Book](https://book.getfoundry.sh/)
 - [Foundry LLM Docs](https://getfoundry.sh/llms-full.txt)
 - [MCP Documentation](https://modelcontextprotocol.io/)
+- [Claude Code MCP Setup](https://code.claude.com/docs/en/mcp)
 
 ## License
 
